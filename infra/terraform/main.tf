@@ -57,3 +57,19 @@ module "monitoring" {
     module.application
   ]
 }
+
+module "network_policy" {
+  source = "./modules/network-policy"
+
+  namespace            = module.namespace.name
+  app_name             = var.application_name
+  database_name        = "postgres"
+  monitoring_namespace = module.monitoring.namespace
+
+  depends_on = [
+    module.application,
+    module.database,
+    module.ingress,
+    module.monitoring
+  ]
+}

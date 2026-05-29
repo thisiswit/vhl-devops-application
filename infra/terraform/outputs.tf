@@ -67,3 +67,8 @@ output "alertmanager_service_name" {
   description = "Alertmanager service name."
   value       = module.monitoring.alertmanager_service_name
 }
+
+output "network_policy_names" {
+  description = "Network policies created for application isolation."
+  value       = module.network_policy.network_policy_names
+}
