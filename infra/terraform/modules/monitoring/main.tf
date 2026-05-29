@@ -27,71 +27,71 @@ resource "helm_release" "kube_prometheus_stack" {
 
   values = [
     yamlencode({
-        additionalPrometheusRulesMap = {
+      additionalPrometheusRulesMap = {
         vhl-application-rules = {
-            groups = [
+          groups = [
             {
-                name = "vhl.application.rules"
+              name = "vhl.application.rules"
 
-                rules = [
+              rules = [
                 {
-                    alert = "AppDown"
-                    expr  = "up{job=\"vhl-python-app\"} == 0"
-                    for   = "1m"
+                  alert = "AppDown"
+                  expr  = "up{job=\"vhl-python-app\"} == 0"
+                  for   = "1m"
 
-                    labels = {
+                  labels = {
                     severity = "critical"
                     service  = "vhl-python-app"
-                    }
+                  }
 
-                    annotations = {
+                  annotations = {
                     summary     = "VHL Python application is down"
                     description = "The vhl-python-app target has been unreachable by Prometheus for more than 1 minute."
-                    }
+                  }
                 }
-                ]
+              ]
             }
-            ]
+          ]
         }
-    }
-    grafana = {
-    enabled       = true
-    adminPassword = var.grafana_admin_password
+      }
+      grafana = {
+        enabled       = true
+        adminPassword = var.grafana_admin_password
 
-    service = {
-        type = "ClusterIP"
-    }
-
-    resources = {
-        requests = {
-        cpu    = "100m"
-        memory = "128Mi"
+        service = {
+          type = "ClusterIP"
         }
 
-        limits = {
-        cpu    = "300m"
-        memory = "256Mi"
-        }
-    }
-    }
-
-    alertmanager = {
-    enabled = true
-
-    alertmanagerSpec = {
         resources = {
-        requests = {
-            cpu    = "50m"
-            memory = "64Mi"
-        }
+          requests = {
+            cpu    = "100m"
+            memory = "128Mi"
+          }
 
-        limits = {
-            cpu    = "200m"
+          limits = {
+            cpu    = "300m"
             memory = "256Mi"
+          }
         }
+      }
+
+      alertmanager = {
+        enabled = true
+
+        alertmanagerSpec = {
+          resources = {
+            requests = {
+              cpu    = "50m"
+              memory = "64Mi"
+            }
+
+            limits = {
+              cpu    = "200m"
+              memory = "256Mi"
+            }
+          }
         }
-    }
-    }
+      }
 
       prometheusOperator = {
         enabled = true
@@ -120,7 +120,7 @@ resource "helm_release" "kube_prometheus_stack" {
       prometheus = {
         prometheusSpec = {
           retention          = "6h"
-          scrapeInterval    = "15s"
+          scrapeInterval     = "15s"
           evaluationInterval = "15s"
 
           resources = {
