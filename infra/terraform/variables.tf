@@ -40,3 +40,27 @@ variable "database_storage_size" {
   type        = string
   default     = "1Gi"
 }
+
+variable "application_name" {
+  description = "Application Kubernetes resource name."
+  type        = string
+  default     = "vhl-python-app"
+}
+
+variable "application_image" {
+  description = "Application container image."
+  type        = string
+  default     = "vhl-devops-application:local"
+}
+
+variable "application_replicas" {
+  description = "Number of application replicas."
+  type        = number
+  default     = 1
+}
+
+variable "application_version" {
+  description = "Application version."
+  type        = string
+  default     = "0.1.0"
+}
