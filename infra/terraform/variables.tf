@@ -64,3 +64,9 @@ variable "application_version" {
   type        = string
   default     = "0.1.0"
 }
+
+variable "ingress_host" {
+  description = "Local hostname used by the Ingress."
+  type        = string
+  default     = "vhl.local"
+}

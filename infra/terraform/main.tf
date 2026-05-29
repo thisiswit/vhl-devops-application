@@ -30,3 +30,16 @@ module "application" {
     module.database
   ]
 }
+
+module "ingress" {
+  source = "./modules/ingress"
+
+  namespace    = module.namespace.name
+  host         = var.ingress_host
+  service_name = module.application.service_name
+  service_port = module.application.service_port
+
+  depends_on = [
+    module.application
+  ]
+}
