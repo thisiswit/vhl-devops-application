@@ -70,3 +70,22 @@ variable "ingress_host" {
   type        = string
   default     = "vhl.local"
 }
+
+variable "monitoring_namespace" {
+  description = "Namespace used by the monitoring stack."
+  type        = string
+  default     = "monitoring"
+}
+
+variable "monitoring_chart_version" {
+  description = "kube-prometheus-stack Helm chart version."
+  type        = string
+  default     = "85.2.2"
+}
+
+variable "grafana_admin_password" {
+  description = "Grafana admin password for local environment."
+  type        = string
+  sensitive   = true
+  default     = "admin"
+}

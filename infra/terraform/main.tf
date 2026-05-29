@@ -43,3 +43,17 @@ module "ingress" {
     module.application
   ]
 }
+
+module "monitoring" {
+  source = "./modules/monitoring"
+
+  namespace              = var.monitoring_namespace
+  chart_version          = var.monitoring_chart_version
+  app_namespace          = module.namespace.name
+  app_service_name       = module.application.service_name
+  grafana_admin_password = var.grafana_admin_password
+
+  depends_on = [
+    module.application
+  ]
+}
