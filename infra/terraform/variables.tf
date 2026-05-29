@@ -15,3 +15,28 @@ variable "environment" {
   type        = string
   default     = "local"
 }
+
+variable "database_name" {
+  description = "PostgreSQL database name."
+  type        = string
+  default     = "vhl_db"
+}
+
+variable "database_user" {
+  description = "PostgreSQL database user."
+  type        = string
+  default     = "vhl_user"
+}
+
+variable "database_password" {
+  description = "PostgreSQL database password."
+  type        = string
+  sensitive   = true
+  default     = "vhl_password"
+}
+
+variable "database_storage_size" {
+  description = "PostgreSQL persistent volume size."
+  type        = string
+  default     = "1Gi"
+}
