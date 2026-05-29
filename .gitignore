@@ -1,2 +1,23 @@
-app-image.tar
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+.env
+.env.*
+!.env.example
+
 *.tar
+app-image.tar
+
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+*.tfstate
+*.tfstate.*
+
+.DS_Store
+.vscode/
+.idea/
