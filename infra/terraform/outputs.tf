@@ -32,3 +32,18 @@ output "application_service_port" {
   description = "Application service port."
   value       = module.application.service_port
 }
+
+output "ingress_name" {
+  description = "Ingress resource name."
+  value       = module.ingress.ingress_name
+}
+
+output "ingress_host" {
+  description = "Ingress local host."
+  value       = module.ingress.host
+}
+
+output "ingress_tls_secret_name" {
+  description = "Ingress TLS Secret name."
+  value       = module.ingress.tls_secret_name
+}

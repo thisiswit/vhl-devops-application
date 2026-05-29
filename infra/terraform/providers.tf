@@ -11,6 +11,11 @@ terraform {
       source  = "hashicorp/helm"
       version = "~> 3.0"
     }
+
+    tls = {
+      source  = "hashicorp/tls"
+      version = "~> 4.1"
+    }
   }
 }
 
@@ -23,3 +28,5 @@ provider "helm" {
     config_path = var.kubeconfig_path
   }
 }
+
+provider "tls" {}
