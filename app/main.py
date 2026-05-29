@@ -3,6 +3,7 @@ import time
 
 import psycopg
 from fastapi import FastAPI, Request, Response, status
+from fastapi.responses import JSONResponse
 from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
 
 
@@ -110,11 +111,14 @@ def db_check():
     except Exception as error:
         DB_CHECK_TOTAL.labels(status="error").inc()
 
-        return {
-            "status": "error",
-            "database": "unavailable",
-            "detail": str(error),
-        }
+        return JSONResponse(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            content={
+                "status": "error",
+                "database": "unavailable",
+                "detail": str(error),
+            },
+        )
 
 
 @app.get("/metrics")

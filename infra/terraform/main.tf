@@ -14,3 +14,19 @@ module "database" {
   database_password = var.database_password
   storage_size      = var.database_storage_size
 }
+
+module "application" {
+  source = "./modules/application"
+
+  namespace            = module.namespace.name
+  name                 = var.application_name
+  app_version          = var.application_version
+  image                = var.application_image
+  replicas             = var.application_replicas
+  postgres_host        = module.database.service_host
+  postgres_secret_name = module.database.secret_name
+
+  depends_on = [
+    module.database
+  ]
+}
