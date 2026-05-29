@@ -115,6 +115,12 @@ resource "kubernetes_service_v1" "app" {
     namespace = var.namespace
 
     labels = local.labels
+
+    annotations = {
+      "prometheus.io/scrape" = "true"
+      "prometheus.io/path"   = "/metrics"
+      "prometheus.io/port"   = "8000"
+    }
   }
 
   spec {
