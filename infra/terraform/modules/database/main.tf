@@ -24,6 +24,8 @@ resource "kubernetes_secret_v1" "postgres" {
 }
 
 resource "kubernetes_persistent_volume_claim_v1" "postgres" {
+  wait_until_bound = false
+
   metadata {
     name      = "${var.name}-pvc"
     namespace = var.namespace
